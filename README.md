@@ -59,9 +59,11 @@ KAFKA CONSOLE PRODUCER CLI
 3. Let us now launch a producer and connect to our broker and first topic and publish messages.
 *     kafka-console-producer --broker-list 127.0.0.1:9092 --topic 
 running it will let us type message. broker-list needs to connect to Kafka, so the ip there is of Kafka
-4. We can set our producer to have properties. Right now its using set of default properties. To provide properties follow below: If you want to set property acks kafka-console-producer --broker-list 127.0.0.0:9092 --topic first_topic —producer-property acks=all upon running you will be able to send messages
+4. We can set our producer to have properties. Right now its using set of default properties. To provide properties follow below: If you want to set property acks
+*     kafka-console-producer --broker-list 127.0.0.0:9092 --topic first_topic —producer-property acks=all upon running you will be able to send messages
 What happens if you publish a message to a topic that does not exist? 
-1. Kafka will first throw a warning saying, leader for the topic mentioned in the command does not exist. It gets elected. Hence producing to a topic that does not exist result in Kafka creating that topic with default setup i.e. 1 Partition, 1 Replication ( 1 copy ), 1 existing Broker and that elected as leader as well. Commands : kafka-console-producer --broker-list 127.0.0.1:9092 --topic new_topic  kafka-console-producer --broker-list 127.0.0.1:9092 --topic new_topic  
+1. Kafka will first throw a warning saying, leader for the topic mentioned in the command does not exist. It gets elected. Hence producing to a topic that does not exist result in Kafka creating that topic with default setup i.e. 1 Partition, 1 Replication ( 1 copy ), 1 existing Broker and that elected as leader as well. Commands :
+*     kafka-console-producer --broker-list 127.0.0.1:9092 --topic new_topic  kafka-console-producer --broker-list 127.0.0.1:9092 --topic new_topic  
 	>hi farah
 [2021-09-05 14:02:58,925] WARN [Producer clientId=console-producer] Error while fetching metadata 	with correlation id 3 : {new_topic=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
 	>wassup 
@@ -87,11 +89,8 @@ KAFKA CONSUMER GROUP :
 A consumer group with 3 consumers listening from a topic with 3 partitions: 
 
 
-￼
-
-Now when any of the terminal is closed and consumer is removed, Partitions are reassigned amongst active consumers
-￼
-If only one consumer is remaining, all partitions will publish to one.
+￼Now when any of the terminal is closed and consumer is removed, Partitions are reassigned amongst active consumers
+￼If only one consumer is remaining, all partitions will publish to one.
 5. Another Imp thing: Suppose we are now listening to the first-topic from  kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-second-app --from-beginning  this will display all the messages that were produced to this topic from the beginning. All good all expected.  But now if you stop this command and run same one again, you will not see all the messages from beginning. Because the offset of messages read by my-second-app is committed. So until the messages that were last read won’t be read now.  
 ￼
 
@@ -99,19 +98,12 @@ KAFKA CONSUMER GROUPS
 
 Command : Kafka-consumer-groups for description kafka-consumer-groups --bootstrap-server 127.0.0.1:9092 --list
 Helps you view the consumer group list, delete and manage kafka-consumer-groups --bootstrap-server 127.0.0.1:9092 --group my-app --describe  Consumer group 'my-app' has no active members. // this means none is active right now
-
-GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
-my-app          first_topic     0          1               1               0               -               -               -
-my-app          first_topic     1          5               5               0               -               -               -
-my-app          first_topic     2          3               3               0               -               -               -
-
-Lag - all messages read, if not then there will be a count that has not been read
-
 RESET OFFSET OF CONSUMER GROUPS:
 
 Upon running Kafka-consumer-groups, you see a option —reset-offsets,   kafka-consumer-groups --bootstrap-server localhost:9092 --group my-second-app --reset-offsets --to-earliest --execute --topic first_topic
 
-Now upon listening to messages from beginning for my-second-app, all messages will be replayed  kafka-console-consumer --bootstrap-server localhost:9092 --group my-second-app --topic first_topic --from-beginning
+Now upon listening to messages from beginning for my-second-app, all messages will be replayed
+*     kafka-console-consumer --bootstrap-server localhost:9092 --group my-second-app --topic first_topic --from-beginning
  hi farah
 best of luck 
 hi farah
