@@ -45,10 +45,11 @@ Now do : Kafka-topics —zookeeper 127.0.0.1:2181 for creating a kafka topic w
 	Topic: first_topic	Partition: 2	Leader: 0	Replicas: 0	Isr: 0 in the above result, it shows 3 partitions, Leader : 0 indicates that Broker with id 0 is the leader.
 6. Creating a second topic with 6 partitions
 *     kafka-topics --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 —replication-factor 1
-Run list again to see if it is added kafka_2.13-2.8.0 % kafka-topics --zookeeper 127.0.0.1:2181 --list                                                            
-
-	first_topic
-	second_topic 	to delete the second_topic:
+Run list again to see if it is added
+*     kafka_2.13-2.8.0 % kafka-topics --zookeeper 127.0.0.1:2181 --list                                                            
+first_topic
+second_topic
+to delete the second_topic:
 	*     kafka-topics --zookeeper 127.0.0.1:2181 --topic second_topic —delete
 
 KAFKA CONSOLE PRODUCER CLI
