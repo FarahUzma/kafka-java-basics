@@ -118,7 +118,7 @@ wassup
 wassup
 
 *     kafka-consumer-groups --bootstrap-server localhost:9092 --group my-second-app --reset-offsets --shift-by -2 execute --topic first_topic 
-— this means we have shifted backwards by 2. Hence minus 2  It will shift by 2 on each partition
+— this means we have shifted backwards by 2. Hence minus 2. It will shift by 2 on each partition
 
 
 KAFKA has client Bi-Directional Compatibility i.e. older client can talk to a newer broker newer client can talk to an older broker :) 
