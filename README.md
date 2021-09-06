@@ -6,7 +6,9 @@ Levelling up with Kafka
 2. Download and install java
 3. Kafka/bin can be added to env variables, otherwise can be used from the source folder as well.
 4. Steps for knowing env variables in Mac : cat ~/.zprofile
-Lets start zookeeper :  cd kafka_2.13-2.8.0 bin/zookeeper-server-start.sh config/zookeeper.properties
+Lets start zookeeper : 
+* 		cd kafka_2.13-2.8.0
+* 		bin/zookeeper-server-start.sh config/zookeeper.properties
 1. Cat config/zookeeper.properties -> cat to view the file we can see one line saying dataDir=/tmp/zookeeper not very good practice so I’m gonna make mkdir data inside Kafka folder farahuzma@Farahs-MacBook-Air kafka_2.13-2.8.0 % mkdir data mkdir data/zookeper
 2. Now I change this path in zookeeper.properties to “/Users/farahuzma/kafka_2.13-2.8.0/data/zookeeper”
 3. Upon restarting zookeeper, now in the above path we can find version-2 folder
