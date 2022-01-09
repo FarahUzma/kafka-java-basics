@@ -21,7 +21,22 @@ public class ConsumerGroupsDemo {
         //producer sends a msg to kafka, it serializes our string and sends it to kafka. Consumer upon receiving needs do desrialize it again
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"my-third-app");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"@Bean\n" +
+                "   public ConsumerFactory<String, String> consumerFactory() {\n" +
+                "      Map<String, Object> props = new HashMap<>();\n" +
+                "      props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, \"localhost:2181\");\n" +
+                "      props.put(ConsumerConfig.GROUP_ID_CONFIG, \"group-id\");\n" +
+                "      props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);\n" +
+                "      props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);\n" +
+                "      return new DefaultKafkaConsumerFactory<>(props);\n" +
+                "   }\n" +
+                "   @Bean\n" +
+                "   public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {\n" +
+                "      ConcurrentKafkaListenerContainerFactory<String, String> \n" +
+                "      factory = new ConcurrentKafkaListenerContainerFactory<>();\n" +
+                "      factory.setConsumerFactory(consumerFactory());\n" +
+                "      return factory;\n" +
+                "   }");
         /*
             Upon setting another consumer in addition to my-third-app,
             there are two consumers now, so this will join the group.
